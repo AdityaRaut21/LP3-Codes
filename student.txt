@@ -1,0 +1,29 @@
+//SPDX-License-Identifier: UNLICENSED
+pragma solidity ^0.8.26;
+contract Studentclass{
+    struct Student{
+        uint id;
+        string  name;
+        string course;
+        uint age;
+
+
+    }
+    Student[] public Students;
+
+    function addStudent(uint _id,string memory _name,string memory _course,uint _age ) public {
+        Students.push(Student(_id,_name,_course,_age));
+    }
+    function getStudent(uint index) public view returns (uint ,string memory,string memory,uint ) {
+        require(index<Students.length,"Invalid index");
+        Student memory student=Students[index];
+        return (student.id,student.name,student.course,student.age);
+    }
+    function studentCount() public  view returns (uint){
+        return Students.length;
+    }
+    fallback()  external payable{
+        // external use 
+    }
+    receive() external payable {}
+}
